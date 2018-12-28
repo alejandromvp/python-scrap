@@ -14,10 +14,8 @@ class LiderSpider(CrawlSpider):
     }
 	allowed_domains = ['www.lider.cl']
 	item_count=0
+	
 	start_urls = [
-		'https://www.lider.cl/supermercado/category/Carnes-y-Pescados/Vacuno/_/N-1gleruj'
-	]	
-	"""start_urls = [
 		'https://www.lider.cl/supermercado/category/Carnes-y-Pescados/Vacuno/_/N-1gleruj',
 		'https://www.lider.cl/supermercado/category/Carnes-y-Pescados/Vacuno/_/N-1gleruj',
 		'https://www.lider.cl/supermercado/category/Carnes-y-Pescados/Pollo/_/N-8fisy4',
@@ -92,7 +90,7 @@ class LiderSpider(CrawlSpider):
 		'https://www.lider.cl/supermercado/category/Hogar-y-Bazar/Cocina-y-Hogar/_/N-77oobg',
 		'https://www.lider.cl/supermercado/category/Especiales/Precios-Especiales/_/N-koawk5',
 		'https://www.lider.cl/supermercado/category/Especiales/Marcas-Propias/_/N-tkgbm8'
-		]"""
+		]
 	rules = (
 		Rule(LinkExtractor(allow=(),restrict_xpaths=('//i[@class="fa fa-angle-right"]/../../a')),follow=True),
 		Rule(LinkExtractor(allow=(),restrict_xpaths=('//div[contains(@class,"product-details")]/a')),callback='parse_item'),
