@@ -94,7 +94,7 @@ class TottusSpider(CrawlSpider):
         nombre = response.xpath('//div[@class="title"]/h5').extract_first()
         nombre = nombre.replace("<h5>", "").replace("<span>","").replace("</span>","").replace("</h5>","").replace("\xa0","")
         producto['nombre'] = nombre
-        producto['sku'] = int(response.xpath("//input[@class='btn-add-cart']/@value").extract_first())
+        producto['sku'] = response.xpath("//input[@class='btn-add-cart']/@value").extract_first()
         producto['descripcion'] = nombre
         precio_activo =  response.xpath('//span[@class="active-price"]/span[1]/text()').extract_first().strip()
         precio_nulo = response.xpath('//span[@class="nule-price"]/text()').extract_first()

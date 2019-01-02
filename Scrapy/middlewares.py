@@ -6,6 +6,7 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.exceptions import IgnoreRequest
 
 
 class ScrapySpiderMiddleware(object):
@@ -87,6 +88,8 @@ class ScrapyDownloaderMiddleware(object):
         # - return a Response object
         # - return a Request object
         # - or raise IgnoreRequest
+        """if response.status == 301:
+            raise IgnoreRequest"""
         return response
 
     def process_exception(self, request, exception, spider):
