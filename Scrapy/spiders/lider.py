@@ -5,6 +5,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 
 class LiderSpider(CrawlSpider):
+	print('lider start')
 	name = 'lider'
 	custom_settings = {
         'LOG_LEVEL': 'ERROR',

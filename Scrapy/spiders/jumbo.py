@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 
 
 class JumboSpider(scrapy.Spider):
+    print('jumbo start')
     custom_settings = {
         'LOG_LEVEL': 'ERROR',
         'LOG_FILE': 'error_jumbo.json',
