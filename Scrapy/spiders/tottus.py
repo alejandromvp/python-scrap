@@ -6,6 +6,7 @@ from scrapy.linkextractors import LinkExtractor
 
 
 class TottusSpider(CrawlSpider):
+    print('tottus start')
     name = 'tottus'
     custom_settings = {
         'LOG_LEVEL': 'ERROR',
@@ -16,8 +17,7 @@ class TottusSpider(CrawlSpider):
     allowed_domains=['www.tottus.cl']
     item_count=0
     start_urls = [
-        'http://www.tottus.cl/tottus/productListFragment/Conservas/118.8?No=0&Nrpp=&currentCatId=118.8',
-        'http://www.tottus.cl/tottus/productListFragment/Aceites-y-Vinagres/118.2?No=0&Nrpp=&currentCatId=118.2'
+        'http://www.tottus.cl/tottus/productListFragment/Conservas/118.8?No=0&Nrpp=&currentCatId=118.8'
     ]
     """start_urls = [
         'http://www.tottus.cl/tottus/productListFragment/Conservas/118.8?No=0&Nrpp=&currentCatId=118.8',
@@ -94,9 +94,8 @@ class TottusSpider(CrawlSpider):
 
     def parse_item(self, response):
         producto = ScrapyItem()
-        nombre = response.xpath('//div[@class="title"]/h5').extract_first()
-        nombre = nombre.replace("<h5>", "").replace("<span>","").replace("</span>","").replace("</h5>","").replace("\xa0","")
-        producto['nombre'] = nombre
+        nombre = response.xpath('//div[@class="title"]/h5/text()').extract_first()
+        producto['nombre'] = nombre.strip()
         producto['sku'] = response.xpath("//input[@class='btn-add-cart']/@value").extract_first()
         producto['descripcion'] = nombre
         precio_activo =  response.xpath('//span[@class="active-price"]/span[1]/text()').extract_first().strip()
