@@ -6,7 +6,6 @@ from scrapy.linkextractors import LinkExtractor
 
 
 class TottusSpider(CrawlSpider):
-    print('tottus start')
     name = 'tottus'
     custom_settings = {
         'LOG_LEVEL': 'ERROR',
@@ -15,11 +14,8 @@ class TottusSpider(CrawlSpider):
         'LOG_STDOUT': True,
     }
     allowed_domains=['www.tottus.cl']
-    item_count=0
+    
     start_urls = [
-        'http://www.tottus.cl/tottus/productListFragment/Conservas/118.8?No=0&Nrpp=&currentCatId=118.8'
-    ]
-    """start_urls = [
         'http://www.tottus.cl/tottus/productListFragment/Conservas/118.8?No=0&Nrpp=&currentCatId=118.8',
         'http://www.tottus.cl/tottus/productListFragment/Aceites-y-Vinagres/118.2?No=0&Nrpp=&currentCatId=118.2',
         'http://www.tottus.cl/tottus/productListFragment/Pastas-y-Salsas/118.5?No=0&Nrpp=&currentCatId=118.5',
@@ -85,7 +81,7 @@ class TottusSpider(CrawlSpider):
         'http://www.tottus.cl/tottus/productListFragment/Otras-Mascotas/cat320049?No=0&Nrpp=&currentCatId=cat320049',
         'http://www.tottus.cl/tottus/productListFragment/Alimento-Perro/119.1?No=0&Nrpp=&currentCatId=119.1',
         'http://www.tottus.cl/tottus/productListFragment/Alimento-Gato/9.2?No=0&Nrpp=&currentCatId=9.2',
-    ]"""
+    ]
 
     rules = (      
         Rule(LinkExtractor(allow=(),restrict_xpaths=('//a[@id="next"]')),follow=True),
@@ -109,6 +105,5 @@ class TottusSpider(CrawlSpider):
         producto['precio_normal'] = int(precio_normal[2:].replace(".",""))
         producto['precio_oferta'] = int(precio_activo[2:].replace(".",""))
         producto['supermercado'] = 3
-        self.item_count += 1
-        print("Tottus: ",self.item_count)
+
         yield producto
