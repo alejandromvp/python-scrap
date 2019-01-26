@@ -7,7 +7,6 @@ from urllib.parse import urlparse
 
 
 class JumboSpider(scrapy.Spider):
-    print('jumbo start')
     custom_settings = {
         'LOG_LEVEL': 'ERROR',
         'LOG_FILE': 'error_jumbo.json',
@@ -16,11 +15,8 @@ class JumboSpider(scrapy.Spider):
     }
     name = 'jumbo'
     allowed_domains = ['jumbo.cl']
+
     start_urls = [
-        "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/1/3/",
-        "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/1/5/"
-    ]
-    """start_urls = [
         "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/1/3/",
         "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/1/5/",
         "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/1/7/",
@@ -144,9 +140,8 @@ class JumboSpider(scrapy.Spider):
         "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/393/399/",
         "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/393/461/"
         
-        ]"""
+        ]
         
-    item_count = 0
     base_url = "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0"
 
     def parse(self, response):
@@ -181,6 +176,4 @@ class JumboSpider(scrapy.Spider):
  
         producto['supermercado'] = 2
 
-        self.item_count += 1
-        print("Jumbo: ",self.item_count)
         yield producto
