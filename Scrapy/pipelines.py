@@ -7,6 +7,7 @@
 #import psycopg2
 import pymongo
 from datetime import datetime
+import uuid
 
 class ScrapyPipeline(object):
 
@@ -24,30 +25,24 @@ class ScrapyPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
-        """hostname='localhost'
-        username='postgres'
-        password='226264nicolas'
-        database='supermercados'
-        self.connection = psycopg2.connect(host=hostname,user=username,password=password,dbname=database)
-        self.cur = self.connection.cursor()"""
-
+      
     def close_spider(self, spider):
-        """self.cur.close()
-        self.connection.close()"""
         self.client.close()
 
     def process_item(self, item, spider):
-        """self.cur.execute("INSERT INTO lista_productos(codigo_supermercado,sku_producto, nombre_producto,descripcion_producto) SELECT * FROM (SELECT %s,%s, %s, %s) AS tmp WHERE NOT EXISTS (SELECT sku_producto FROM lista_productos WHERE sku_producto = %s and codigo_supermercado= %s) LIMIT 1",(item['supermercado'],item['sku'],item['nombre'],item['descripcion'],item['sku'],item['supermercado']))
-        self.connection.commit()
-        self.cur.execute("insert into precios_productos(sku_producto,codigo_supermercado,precio_normal,precio_oferta) values(%s,%s,%s,%s)",(item['sku'],item['supermercado'],item['precio_normal'],item['precio_oferta']))
-        self.connection.commit()"""
+        #algunos productos no tienen sku, le genero uno
         if item['sku'] is None:
-            self.db.lista_productos.insert_one({"codigo_supermercado":item['supermercado'],"sku_producto":"SIN SKU","nombre_producto":item['nombre'],"descripcion_producto":item['descripcion']})
-            self.db.precio_productos.insert_one({"sku_producto":"SIN SKU","codigo_supermercado":item['supermercado'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
+            unique_id = uuid.uuid1()
+            item['sku'] = 'SS-'+str(unique_id)
+
+        #busco si el sku escaneado está en la BD
+        producto = self.db.lista_productos.find_one({"sku_producto":item['sku']})
+
+        if producto is None:#si no está, lo inserto
+            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"fecha_registro":str(datetime.now())}).inserted_id
+            self.db.precio_productos.insert_one({"id_producto":id_producto,"codigo_supermercado":item['supermercado'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         else:
-            key = {"codigo_supermercado":item['supermercado'],"sku_producto":item['sku']}
-            data = {"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion']}
-            self.db.lista_productos.replace_one(key,data,upsert=True)
-            self.db.precio_productos.insert_one({"sku_producto":item['sku'],"codigo_supermercado":item['supermercado'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
+            self.db.precio_productos.insert_one({"id_producto":producto['_id'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
+
 
         return item
