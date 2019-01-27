@@ -106,13 +106,13 @@ class LiderSpider(CrawlSpider):
 
 		precio_activo = int(float(response.xpath('//p[@itemprop="lowPrice"]/@content').extract_first()))
 
-		precio_nulo = response.xpath('//p[@itemprop="highPrice"]/@content').extract_first()
+		precio_nulo = int(float(response.xpath('//p[@itemprop="highPrice"]/@content').extract_first()))
 		precio_normal = 0
 
 		if precio_nulo is None:
 			precio_normal = precio_activo
 		else:
-			precio_normal =int(precio_nulo)
+			precio_normal =precio_nulo
 
 		producto['precio_normal'] = precio_normal
 		producto['precio_oferta'] = precio_activo
