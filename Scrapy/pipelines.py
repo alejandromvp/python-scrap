@@ -40,7 +40,7 @@ class ScrapyPipeline(object):
 
         if producto is None:#si no está, lo inserto
             id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"fecha_registro":str(datetime.now())}).inserted_id
-            self.db.precio_productos.insert_one({"id_producto":id_producto,"codigo_supermercado":item['supermercado'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
+            self.db.precio_productos.insert_one({"id_producto":id_producto,"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         else:
             self.db.precio_productos.insert_one({"id_producto":producto['_id'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
 
