@@ -41,9 +41,12 @@ class ScrapyPipeline(object):
         self.connection.commit()
         self.cur.execute("insert into precios_productos(sku_producto,codigo_supermercado,precio_normal,precio_oferta) values(%s,%s,%s,%s)",(item['sku'],item['supermercado'],item['precio_normal'],item['precio_oferta']))
         self.connection.commit()"""
-        key = {"codigo_supermercado":item['supermercado'],"sku_producto":item['sku']}
-        data = {"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion']}
-        self.db.lista_productos.replace_one(key,data,upsert=True)
+        if item['sku'] is None:
+            self.db.lista_productos.insert_one({"codigo_supermercado":item['supermercado'],"sku_producto":"SIN SKU","nombre_producto":item['nombre'],"descripcion_producto":item['descripcion']})
+        else:
+            key = {"codigo_supermercado":item['supermercado'],"sku_producto":item['sku']}
+            data = {"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion']}
+            self.db.lista_productos.replace_one(key,data,upsert=True)
 
         self.db.precio_productos.insert_one({"sku_producto":item['sku'],"codigo_supermercado":item['supermercado'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         return item
