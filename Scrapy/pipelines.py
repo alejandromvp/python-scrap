@@ -36,7 +36,7 @@ class ScrapyPipeline(object):
             item['sku'] = 'SS-'+str(unique_id)
 
         #busco si el sku escaneado está en la BD
-        producto = self.db.lista_productos.find_one({"sku_producto":item['sku']})
+        producto = self.db.lista_productos.find_one({"sku_producto":item['sku'],"codigo_supermercado":item['supermercado']})
 
         if producto is None:#si no está, lo inserto
             id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"fecha_registro":str(datetime.now())}).inserted_id
