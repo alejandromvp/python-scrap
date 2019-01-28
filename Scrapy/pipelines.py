@@ -25,6 +25,10 @@ class ScrapyPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
+        self.lider = self.db.lista_supermercados.find_one({"id_supermercado":1})
+        self.jumbo = self.db.lista_supermercados.find_one({"id_supermercado":2})
+        self.tottus = self.db.lista_supermercados.find_one({"id_supermercado":3})
+
       
     def close_spider(self, spider):
         self.client.close()
@@ -35,14 +39,20 @@ class ScrapyPipeline(object):
             unique_id = uuid.uuid1()
             item['sku'] = 'SS-'+str(unique_id)
 
+        if item['supermercado'] == 1:
+            supermercado = self.lider['_id']
+        elif item['supermercado'] == 2:
+            supermercado = self.jumbo['_id']
+        else:
+            supermercado = self.tottus['_id']
+
         #busco si el sku escaneado está en la BD
-        producto = self.db.lista_productos.find_one({"sku_producto":item['sku'],"codigo_supermercado":item['supermercado']})
+        producto = self.db.lista_productos.find_one({"sku_producto":item['sku'],"codigo_supermercado":supermercado})
 
         if producto is None:#si no está, lo inserto
-            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":item['supermercado'],"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"fecha_registro":str(datetime.now())}).inserted_id
+            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":supermercado,"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"fecha_registro":str(datetime.now())}).inserted_id
             self.db.precio_productos.insert_one({"id_producto":id_producto,"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         else:
             self.db.precio_productos.insert_one({"id_producto":producto['_id'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
-
 
         return item
