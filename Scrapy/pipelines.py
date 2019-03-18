@@ -8,6 +8,7 @@
 import pymongo
 from datetime import datetime
 import uuid
+from bson.objectid import ObjectId
 
 class ScrapyPipeline(object):
 
@@ -48,11 +49,15 @@ class ScrapyPipeline(object):
 
         #busco si el sku escaneado está en la BD
         producto = self.db.lista_productos.find_one({"sku_producto":item['sku'],"codigo_supermercado":supermercado})
+        categoria = self.db.categorias.find_one({"nombre_categoria":item['categoria']})
 
         if producto is None:#si no está, lo inserto
-            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":supermercado,"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"fecha_registro":str(datetime.now())}).inserted_id
+            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":supermercado,"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"categoria_producto":categoria['_id'],"fecha_registro":str(datetime.now())}).inserted_id
+
             self.db.precio_productos.insert_one({"id_producto":id_producto,"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         else:
-            self.db.precio_productos.insert_one({"id_producto":producto['_id'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
+            #sacar cuando todos los productos tengan categoría
+            self.db.lista_productos.update_one({"_id":ObjectId(producto['_id'])},{"$set":{"categoria_producto":categoria['_id']}})
 
+            self.db.precio_productos.insert_one({"id_producto":producto['_id'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         return item
