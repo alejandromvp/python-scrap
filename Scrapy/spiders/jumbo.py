@@ -140,7 +140,6 @@ class JumboSpider(scrapy.Spider):
         "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0&PageNumber=1&fq=C:/393/461/&cat=nada"
         
         ]
-
     base_url = "https://nuevo.jumbo.cl/buscapagina?sl=3a356ef2-a2d4-4f1b-865f-c79b6fcf0f2a&PS=50&cc=18&sm=0"
 
     def parse(self, response):
@@ -166,7 +165,6 @@ class JumboSpider(scrapy.Spider):
         producto['nombre'] = nombre
         producto['sku'] = response.xpath('//div[@class="skuReference"]/text()').extract_first()
         producto['descripcion'] = nombre
-
         precio_activo = response.xpath('//strong[@class="skuBestPrice"]/text()').extract_first()
         if precio_activo:
             producto['precio_normal'] = int(precio_activo.split('$')[1].strip().split(',')[0].replace('.',''))
