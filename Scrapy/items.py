@@ -15,3 +15,4 @@ class ScrapyItem(scrapy.Item):
     precio_normal = scrapy.Field()
     precio_oferta = scrapy.Field()
     supermercado = scrapy.Field()
+    categoria = scrapy.Field()
