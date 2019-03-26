@@ -127,6 +127,7 @@ class LiderSpider(CrawlSpider):
 		titulo = response.xpath('//title/text()').extract_first()
 		titulo = titulo.split('|')
 		producto['nombre'] = titulo[0].strip()
+		print(titulo[0].strip())
 		producto['sku'] = response.xpath('//span[@itemprop="productID"]/text()').extract_first()
 		producto['descripcion'] = response.xpath('//span[@itemprop="name"]/text()').extract_first()
 

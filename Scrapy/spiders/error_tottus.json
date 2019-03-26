@@ -1,0 +1,102 @@
+2019-03-21 04:00:30 [scrapy.core.scraper] ERROR: Spider error processing <GET https://www.tottus.cl/tottus/product/NESCAFE/Caf%C3%A9-Dolce-Gusto-Mocha/20306806?navAction=jump&navCount=0&cat=nada> (referer: https://www.tottus.cl/tottus/productListFragment/Caf%C3%A9-y-T%C3%A9/116.1?No=0&Nrpp=80&currentCatId=116.1&cat=nada)
+Traceback (most recent call last):
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spiders/crawl.py", line 78, in _parse_response
+    for requests_or_item in iterate_spider_output(cb_res):
+  File "/root/python/supermercados/src_scrapy/Scrapy/spiders/tottus.py", line 102, in parse_item
+    producto['nombre'] = nombre.strip()
+AttributeError: 'NoneType' object has no attribute 'strip'
+2019-03-22 04:02:48 [scrapy.core.scraper] ERROR: Spider error processing <GET https://www.tottus.cl/tottus/product/NESCAFE/Caf%C3%A9-Dolce-Gusto-Mocha/20306806?navAction=jump&navCount=0&cat=nada> (referer: https://www.tottus.cl/tottus/productListFragment/Caf%C3%A9-y-T%C3%A9/116.1?No=0&Nrpp=80&currentCatId=116.1&cat=nada)
+Traceback (most recent call last):
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spiders/crawl.py", line 78, in _parse_response
+    for requests_or_item in iterate_spider_output(cb_res):
+  File "/root/python/supermercados/src_scrapy/Scrapy/spiders/tottus.py", line 102, in parse_item
+    producto['nombre'] = nombre.strip()
+AttributeError: 'NoneType' object has no attribute 'strip'
+2019-03-23 04:01:12 [scrapy.core.scraper] ERROR: Spider error processing <GET https://www.tottus.cl/tottus/product/NESCAFE/Caf%C3%A9-Dolce-Gusto-Mocha/20306806?navAction=jump&navCount=0&cat=nada> (referer: https://www.tottus.cl/tottus/productListFragment/Caf%C3%A9-y-T%C3%A9/116.1?No=0&Nrpp=80&currentCatId=116.1&cat=nada)
+Traceback (most recent call last):
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spiders/crawl.py", line 78, in _parse_response
+    for requests_or_item in iterate_spider_output(cb_res):
+  File "/root/python/supermercados/src_scrapy/Scrapy/spiders/tottus.py", line 102, in parse_item
+    producto['nombre'] = nombre.strip()
+AttributeError: 'NoneType' object has no attribute 'strip'
+2019-03-24 04:02:36 [scrapy.core.scraper] ERROR: Spider error processing <GET https://www.tottus.cl/tottus/product/NESCAFE/Caf%C3%A9-Dolce-Gusto-Mocha/20306806?navAction=jump&navCount=0&cat=nada> (referer: https://www.tottus.cl/tottus/productListFragment/Caf%C3%A9-y-T%C3%A9/116.1?No=0&Nrpp=80&currentCatId=116.1&cat=nada)
+Traceback (most recent call last):
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spiders/crawl.py", line 78, in _parse_response
+    for requests_or_item in iterate_spider_output(cb_res):
+  File "/root/python/supermercados/src_scrapy/Scrapy/spiders/tottus.py", line 102, in parse_item
+    producto['nombre'] = nombre.strip()
+AttributeError: 'NoneType' object has no attribute 'strip'
+2019-03-25 04:04:03 [scrapy.core.scraper] ERROR: Spider error processing <GET https://www.tottus.cl/tottus/product/NESCAFE/Caf%C3%A9-Dolce-Gusto-Mocha/20306806?navAction=jump&navCount=0&cat=nada> (referer: https://www.tottus.cl/tottus/productListFragment/Caf%C3%A9-y-T%C3%A9/116.1?No=0&Nrpp=80&currentCatId=116.1&cat=nada)
+Traceback (most recent call last):
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spiders/crawl.py", line 78, in _parse_response
+    for requests_or_item in iterate_spider_output(cb_res):
+  File "/root/python/supermercados/src_scrapy/Scrapy/spiders/tottus.py", line 102, in parse_item
+    producto['nombre'] = nombre.strip()
+AttributeError: 'NoneType' object has no attribute 'strip'
+2019-03-25 04:08:34 [scrapy.core.scraper] ERROR: Spider error processing <GET https://www.tottus.cl/tottus/product/MARCO-POLO/Ali%C3%B1o-Completo/01010423?navAction=jump&navCount=0&cat=nada> (referer: https://www.tottus.cl/tottus/productListFragment/Condimentos-y-Aderezos/118.16?No=0&Nrpp=100&currentCatId=118.16&cat=nada)
+Traceback (most recent call last):
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/python/supermercados/lib64/python3.6/site-packages/scrapy/spiders/crawl.py", line 78, in _parse_response
+    for requests_or_item in iterate_spider_output(cb_res):
+  File "/root/python/supermercados/src_scrapy/Scrapy/spiders/tottus.py", line 102, in parse_item
+    producto['nombre'] = nombre.strip()
+AttributeError: 'NoneType' object has no attribute 'strip'
