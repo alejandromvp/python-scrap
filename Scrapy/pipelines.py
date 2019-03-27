@@ -52,12 +52,12 @@ class ScrapyPipeline(object):
         categoria = self.db.categorias.find_one({"nombre_categoria":item['categoria']})
 
         if producto is None:#si no está, lo inserto
-            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":supermercado,"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"categoria_producto":categoria['_id'],"fecha_registro":str(datetime.now())}).inserted_id
+            id_producto = self.db.lista_productos.insert_one({"codigo_supermercado":supermercado,"sku_producto":item['sku'],"nombre_producto":item['nombre'],"descripcion_producto":item['descripcion'],"categoria_producto":categoria['_id'],"fecha_registro":str(datetime.now()),"estado_producto":True}).inserted_id
 
             self.db.precio_productos.insert_one({"id_producto":id_producto,"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         else:
             #sacar cuando todos los productos tengan categoría
-            self.db.lista_productos.update_one({"_id":ObjectId(producto['_id'])},{"$set":{"categoria_producto":categoria['_id']}})
+            self.db.lista_productos.update_one({"_id":ObjectId(producto['_id'])},{"$set":{"categoria_producto":categoria['_id'],"estado_producto":True}})
 
             self.db.precio_productos.insert_one({"id_producto":producto['_id'],"precio_normal":item['precio_normal'],"precio_oferta":item['precio_oferta'],"fecha_registro":str(datetime.now())})
         return item
