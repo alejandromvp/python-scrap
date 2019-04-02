@@ -176,4 +176,5 @@ class JumboSpider(scrapy.Spider):
         producto['supermercado'] = 2
         o = urlparse(response.url)
         producto['categoria']=o.query[4:]
+        producto['url'] = response.url
         yield producto

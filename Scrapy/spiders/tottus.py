@@ -115,4 +115,5 @@ class TottusSpider(CrawlSpider):
         producto['supermercado'] = 3
         o = urlparse(response.url)
         producto['categoria']=o.query.split('&')[2][4:]
+        producto['url'] = response.url
         yield producto

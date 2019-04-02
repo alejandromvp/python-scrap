@@ -145,4 +145,5 @@ class LiderSpider(CrawlSpider):
 		producto['supermercado'] = 1
 		o = urlparse(response.url)
 		producto['categoria']=o.query[4:]
+		producto['url'] = response.url
 		yield producto

@@ -16,3 +16,4 @@ class ScrapyItem(scrapy.Item):
     precio_oferta = scrapy.Field()
     supermercado = scrapy.Field()
     categoria = scrapy.Field()
+    url = scrapy.Field()
