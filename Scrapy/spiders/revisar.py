@@ -16,10 +16,7 @@ class RevisarSpider(scrapy.Spider):
     cursor = db.lista_productos.find({})
     start_urls = []
     for prod in cursor:
-        if prod['url_producto'] is not None:
-            start_urls.append(prod['url_producto'])
-        else:
-            start_urls.append("http://ayndemos.com")
+        start_urls.append(prod['url_producto'])
             
     #print(productos)    
 
